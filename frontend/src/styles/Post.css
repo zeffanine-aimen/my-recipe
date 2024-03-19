@@ -1,0 +1,63 @@
+.post-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    margin-bottom: 30px;
+    max-width: 600px; /* Set maximum width */
+  }
+  
+  .post-image-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 8px; /* Add some spacing between image and user info */
+  }
+  
+  .post-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    width: 36px; /* Reduce avatar size */
+    height: 36px; /* Reduce avatar size */
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 8px; /* Reduce spacing between avatar and user details */
+  }
+  
+  .user-details {
+    flex-grow: 1;
+  }
+  
+  .user-name {
+    font-weight: bold;
+    margin-bottom: 2px; /* Reduce spacing between name and time */
+  }
+  
+  .time {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+  }
+  
+  .post-title {
+    font-size: 16px; /* Reduce title font size */
+    margin-top: 8px; /* Reduce spacing between title and content */
+    margin-bottom: 4px;
+  }
+  
+  .post-content {
+    font-size: 14px; /* Reduce content font size */
+    margin: 0;
+  }
+  
