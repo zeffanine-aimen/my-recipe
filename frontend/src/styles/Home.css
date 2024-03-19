@@ -1,0 +1,17 @@
+/* Home.css */
+
+.home-container {
+    display: flex;
+    height: 100vh; /* Adjust height as needed */
+  }
+  
+  .sidebar {
+    width: 30%;
+    background-color: #f0f0f0;
+  }
+  
+  .recipes {
+    width: 70%;
+    background-color: #ffffff;
+  }
+  
