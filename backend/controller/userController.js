@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
     try {
         const user = await models.User.findOne({where: {email}})
         if(user === null) {
-            res.status(401).json({message: "كلمة المرور أو البريد الإلكتروني غير صحيح"})
+            res.status(401).json({message: "Incorrect email or password"})
         } else {
             const pass = await bcrypt.compare(password, user.password)
             if (pass) {
@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
                  }, process.env.JWT)
                 res.status(200).json({accessToken: token});
             } else {
-                res.status(401).json({message: "كلمة المرور أو البريد الإلكتروني غير صحيح"})
+                res.status(401).json({message: "Incorrect email or password"})
             }
         }
     } catch (e) {
