@@ -10,8 +10,9 @@ function Sidebar({ currentUser }) {
     <div className="sidebar">
       {/* Current user profile */}
       <div className="current-user">
-        {currentUser.avatarUrl ? (
-          <img src={currentUser.avatarUrl} alt={currentUser.name} className="avatar" />
+        {currentUser.img_uri ? (
+         
+          <img src={`${process.env.REACT_APP_API_URL}${currentUser.img_uri}`} alt={currentUser.name} className="avatar" />
         ) : (
           <FaUserCircle className="avatar" />
         )}

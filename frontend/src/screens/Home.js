@@ -1,18 +1,18 @@
-// Home.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom'; // Import useNavigate for navigation
-import Sidebar from '../components/Sidebar'; // Import the Sidebar component
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
-import LoginMessage from '../components/LoginMsg'; // Import the LoginMessage component
-import '../styles/Home.css'; // Import the CSS file for styling
+import LoginMessage from '../components/LoginMsg';
+import '../styles/Home.css';
 
 function Home() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || '');
-  const [showLoginMessage, setShowLoginMessage] = useState(false); // State to control visibility of login message
-  const navigate = useNavigate(); // Get the navigate function for navigation
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null); // Initialize currentUser state
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -25,42 +25,52 @@ function Home() {
     };
 
     fetchPosts();
-  }, []);
 
-  // Mock current user information
-  const currentUser = {
-    name: 'John Doe', // Replace with actual user information
-    // avatarUrl: 'https://example.com/avatar.jpg', // Replace with actual avatar URL
-  };
+    // Fetch user profile data if token is available
+    const fetchUserProfile = async () => {
+      if (token) {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/account/profile`, {
+            headers: {
+              Authorization: token
+            }
+          });
+          setCurrentUser(response.data);
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+        }
+      }
+    };
 
-  // Function to handle post click
+    fetchUserProfile();
+  }, [token]); // Include token in dependency array
+
   const handlePostClick = (postId) => {
-    // Check if user is logged in
     if (token) {
-      // Navigate to post details page
       navigate(`/post/${postId}`);
     } else {
-      // If user is not logged in, show login message
       setShowLoginMessage(true);
     }
   };
 
   return (
     <div className="home-container">
-      {/* Render the Sidebar component with currentUser prop */}
-      <Sidebar currentUser={currentUser} />
+      {/* Pass currentUser to Sidebar component */}
+      <Sidebar currentUser={currentUser ? currentUser : { name: 'Name' }} />
       <div className="recipes">
         <h2>Recipes</h2>
-        <ul>
-          {posts.map(post => (
-            // Make each post clickable
-            <li key={post.id} onClick={() => handlePostClick(post.id)}>
-              <Post post={post} />
-            </li>
-          ))}
-        </ul>
+        {posts.length === 0 ? (
+          <p className="no-posts-msg">No posts available at the moment. Please check back later.</p>
+        ) : (
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id} onClick={() => handlePostClick(post.id)}>
+                <Post post={post} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {/* Render the LoginMessage component if showLoginMessage is true */}
       {showLoginMessage && <LoginMessage />}
     </div>
   );

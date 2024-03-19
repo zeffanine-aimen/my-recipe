@@ -47,3 +47,8 @@
     font-size: 18px;
     font-weight: bold;
   }
+
+  /* Add this style to override default list styles */
+.recipes ul {
+  list-style: none;
+}
