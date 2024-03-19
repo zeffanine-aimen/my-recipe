@@ -14,9 +14,9 @@ exports.register = async (req, res) => {
                 email,
                 password: hashPassowrd
             })
-            res.status(200).json({message: "تم إنشاء حسابك بنجاح"});
+            res.status(200).json({message: "Your account has been successfully created."});
         } else {
-            res.status(400).json({message: "هذا البريد الإلكتروني مستخدم مسبقًا"})
+            res.status(400).json({message: "This email is already in use."})
         }
     } catch (e) {
         res.status(500).json(e)

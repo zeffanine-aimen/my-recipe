@@ -89,3 +89,19 @@ button:hover {
   margin: 0;
   color: #721c24;
 }
+
+
+/* New styles for registration link */
+p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+p > a {
+  color: #3897f0; /* Link color */
+  text-decoration: none;
+}
+
+p > a:hover {
+  text-decoration: underline; /* Underline on hover */
+}

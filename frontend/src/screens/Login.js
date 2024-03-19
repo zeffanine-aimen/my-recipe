@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ErrorMsg from '../components/ErrorMsg';
 import '../styles/Login.css';
 
@@ -8,10 +8,12 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
 
     try {
       const response = await axios.post(
@@ -36,13 +38,15 @@ function Login() {
         setError('An unexpected error occurred');
       }
     }
+
+    setLoading(false); 
   };
 
   return (
     <div className="login-container">
       <div className="login-form">
         <h2>Login</h2>
-        {error && <ErrorMsg message={error} />} 
+        {error && <ErrorMsg message={error} />}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -52,8 +56,11 @@ function Login() {
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             <label>Password</label>
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Loading...' : 'Login'} {/* Change button text based on loading state */}
+          </button>
         </form>
+        <p>Don't have an account? <Link to="/register">Register here</Link>.</p>
       </div>
     </div>
   );
