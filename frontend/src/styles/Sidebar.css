@@ -1,0 +1,49 @@
+.current-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+  
+  .sidebar-links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #262626;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .link:hover {
+    color: #405DE6;
+  }
+  
+  .icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .link-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
