@@ -86,6 +86,7 @@ input:focus {
 }
 
 .login-container .error-message {
+  margin-bottom: 5px;
   margin: 0;
   color: #721c24;
 }

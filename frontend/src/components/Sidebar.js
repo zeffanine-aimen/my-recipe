@@ -1,5 +1,3 @@
-// Sidebar.js
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaUserCircle, FaStickyNote, FaPlusCircle, FaSignOutAlt } from 'react-icons/fa';
@@ -10,12 +8,13 @@ function Sidebar({ currentUser }) {
     <div className="sidebar">
       {/* Current user profile */}
       <div className="current-user">
-        {currentUser.img_uri ? (
-         
-          <img src={`${process.env.REACT_APP_API_URL}${currentUser.img_uri}`} alt={currentUser.name} className="avatar" />
-        ) : (
-          <FaUserCircle className="avatar" />
-        )}
+        <div className="avatar-container">
+          {currentUser.img_uri ? (
+            <img src={`${process.env.REACT_APP_API_URL}${currentUser.img_uri}`} alt={currentUser.name} className="avatar" />
+          ) : (
+            <FaUserCircle className="avatar" />
+          )}
+        </div>
         <span className="name">{currentUser.name}</span>
       </div>
       
@@ -33,7 +32,7 @@ function Sidebar({ currentUser }) {
           <FaPlusCircle className="icon" />
           <span className="link-text">Create Post</span>
         </Link>
-        <Link to="/logout" className="link">
+        <Link to="/logout" className="link" onClick={() => localStorage.removeItem('token')}>
           <FaSignOutAlt className="icon" />
           <span className="link-text">Logout</span>
         </Link>

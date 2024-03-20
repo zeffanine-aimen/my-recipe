@@ -10,7 +10,7 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [showLoginMessage, setShowLoginMessage] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null); // Initialize currentUser state
+  const [currentUser, setCurrentUser] = useState({ name: 'Name' }); // Initialize with empty object
 
   const navigate = useNavigate();
 
@@ -24,9 +24,10 @@ function Home() {
       }
     };
 
-    fetchPosts();
+    if (token) {
+      fetchPosts();
+    }
 
-    // Fetch user profile data if token is available
     const fetchUserProfile = async () => {
       if (token) {
         try {
@@ -43,7 +44,7 @@ function Home() {
     };
 
     fetchUserProfile();
-  }, [token]); // Include token in dependency array
+  }, [token]);
 
   const handlePostClick = (postId) => {
     if (token) {
@@ -55,8 +56,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* Pass currentUser to Sidebar component */}
-      <Sidebar currentUser={currentUser ? currentUser : { name: 'Name' }} />
+      <Sidebar currentUser={currentUser} />
       <div className="recipes">
         <h2>Recipes</h2>
         {posts.length === 0 ? (
