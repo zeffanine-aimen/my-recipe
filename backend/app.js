@@ -5,25 +5,22 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = require('./models/database');
 const models = require('./models');
-
+const morgan = require('morgan'); // Added Morgan
 
 const port = process.env.PORT || 5000;
 
 const app = express();
 
-
 app.use(cors());
-
-
-
-
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('*/images', express.static(__dirname + '/public/images'))
+app.use('*/images', express.static(__dirname + '/public/images'));
+
+// Morgan for logging HTTP requests
+app.use(morgan('dev'));
 
 app.use('/', router);
-
 
 db.sync({ force: true }).then(() => {
     app.listen(port, () => {

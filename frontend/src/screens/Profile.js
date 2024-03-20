@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaHome } from 'react-icons/fa'; // Import FaHome for the home icon
+import { Link } from 'react-router-dom'; // Import Link for routing
 
 import '../styles/Profile.css'; // Import your CSS file for styling
 
@@ -140,6 +141,7 @@ const Profile = () => {
         </div>
       </div>
       {message && <p className="profile-message">{message}</p>}
+      
     </div>
   );
 };

@@ -67,7 +67,7 @@ exports.uploadUserPhoto = async (req, res) => {
             {where: {id: req.currentUser.id}}
         )
         res.status(200).json({
-            message: "تم إضافة الصورة بنجاح"
+            message: "Image added successfully."
         })
     } catch(e) {
         res.status(500).json(e.message)
@@ -85,7 +85,7 @@ exports.updateProfile = async (req, res) => {
             },
             {where: {id: req.currentUser.id}}
         );
-        res.status(200).json({message: "تم تعديل البيانات الشخصية"})
+        res.status(200).json({message: "Personal data has been modified"})
     } catch(e) {
         res.status(500).json(e)
     }

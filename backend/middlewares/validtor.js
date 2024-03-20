@@ -2,28 +2,29 @@ const { body, validationResult } = require('express-validator');
 
 const userValidationRules = () => {
     return [
-        body('name').notEmpty().withMessage('اسم المستخدم مطلوب'),
-        body('email').notEmpty().withMessage('البريد الإلكتروني مطلوب'),
-        body('password').notEmpty().withMessage('كلمة المرور مطلوبة'),
-        body('password').isLength({ min: 5 }).withMessage('كلمة المرور يجب أن تكون أكثر من خمسة محارف'),
+        body('name').notEmpty().withMessage('Username is required'),
+        body('email').notEmpty().withMessage('Email is required'),
+        body('password').notEmpty().withMessage('Password is required'),
+        body('password').isLength({ min: 5 }).withMessage('Password must be at least five characters long'),
     ]
 }
 
 const updateUserValidationRules = () => {
     return [
-        body('name').notEmpty().withMessage('اسم المستخدم مطلوب'),
-        body('password').notEmpty().withMessage('كلمة المرور مطلوبة'),
-        body('password').isLength({ min: 5 }).withMessage('كلمة المرور يجب أن تكون أكثر من خمسة محارف'),
+        body('name').notEmpty().withMessage('Username is required'),
+        body('password').notEmpty().withMessage('Password is required'),
+        body('password').isLength({ min: 5 }).withMessage('Password must be at least five characters long'),
     ]
 }
 
 const postValidationRules = () => {
     return [
-        body('title').notEmpty().withMessage('عنوان المنشور مطلوب'),
-        body('contents').notEmpty().withMessage('مكونات المنشور مطلوبة'),
-        body('steps').notEmpty().withMessage('خطوات المنشور مطلوبة'),
+        body('title').notEmpty().withMessage('Post title is required'),
+        body('contents').notEmpty().withMessage('Post contents are required'),
+        body('steps').notEmpty().withMessage('Post steps are required'),
     ]
 }
+
 
 
 const validate = (req, res, next) => {

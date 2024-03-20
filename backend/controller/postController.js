@@ -19,7 +19,7 @@ exports.newPost = async (req, res) => {
                 PostId: post.id
             })
         })
-        res.status(200).json({message: "تم إضافة منشور جديد"})
+        res.status(200).json({message: "A new post has been added"})
     } catch(e) {
         res.status(500).json(e)
     }
@@ -63,7 +63,6 @@ exports.getPost = async (req, res) => {
         res.status(500).json(e)
     }
 }
-
 
 exports.getMyAllPosts = async (req, res) => {
     try{
