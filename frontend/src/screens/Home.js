@@ -27,9 +27,8 @@ function Home() {
       }
     };
 
-    if (token) {
+
       fetchPosts();
-    }
 
     const fetchUserProfile = async () => {
       if (token) {

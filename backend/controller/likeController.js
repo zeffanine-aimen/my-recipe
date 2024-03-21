@@ -10,13 +10,13 @@ exports.like = async (req, res) => {
             await models.Like.destroy({
                 where: {UserId: req.currentUser.id, PostId: req.params.postId}
             })
-            res.status(200).json({message: "تم حذف الإعجاب"})
+            res.status(200).json({message: "Like deleted"})
         } else {
             await models.Like.create({
                 UserId: req.currentUser.id,
                 PostId: req.params.postId
             })
-            res.status(200).json({message: "تم إضافة الإعجاب"})
+            res.status(200).json({message: "Like added"})
         }
     } catch(e) {
         res.status(500).json(e)

@@ -34,57 +34,95 @@ function PostDetails() {
         fetchPost();
     }, [postId, token]);
 
+    const createComment = async () => {
+        try {
+            await axios.post(
+                `${process.env.REACT_APP_API_URL}/posts/${postId}/create-comment`,
+                { text: commentInput },
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            );
+            setCommentInput(''); // Clear comment input after submission
+            // Refetch comments to update UI
+            const comments = await fetchComments();
+            setComments(comments);
+        } catch (error) {
+            console.error('Error creating comment:', error);
+        }
+    };
+    
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}/comments`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
+            const response = await axios.get(
+                `${process.env.REACT_APP_API_URL}/posts/${postId}/get-comments`,
+                {
+                    headers: {
+                        Authorization: token
+                    }
                 }
-            });
+            );
             return response.data;
         } catch (error) {
             console.error('Error fetching comments:', error);
             return [];
         }
     };
+    
 
     const fetchLikeCount = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}/like-count`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
+            const response = await axios.get(
+                `${process.env.REACT_APP_API_URL}/posts/${postId}/like-count`,
+                {
+                    headers: {
+                        Authorization: token
+                    }
                 }
-            });
+            );
             return response.data;
         } catch (error) {
             console.error('Error fetching like count:', error);
             return { likes: 0, userLiked: false };
         }
     };
+    
 
-    const handleLikeToggle = async () => {
-        // Toggle like action
+    const toggleLike = async () => {
         try {
-            // Call API to toggle like
-            setUserLiked(!userLiked); // Toggle userLiked state
-            setLikeCount(prevCount => userLiked ? prevCount - 1 : prevCount + 1); // Adjust like count
+            const response = await axios.put(
+                `${process.env.REACT_APP_API_URL}/posts/${postId}/like`,
+                {},
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            );
+            const { message } = response.data;
+            if (message === "Like deleted") {
+                setLikeCount(prevCount => prevCount - 1);
+                setUserLiked(false);
+            } else if (message === "Like added") {
+                setLikeCount(prevCount => prevCount + 1);
+                setUserLiked(true);
+            }
         } catch (error) {
             console.error('Error toggling like:', error);
         }
     };
+    
 
     const handleCommentSubmit = async () => {
-        // Submit comment action
         try {
-            // Call API to submit comment with commentInput value
-            setCommentInput(''); // Clear comment input after submission
-            // Refetch comments to update UI
-            const comments = await fetchComments();
-            setComments(comments);
+            await createComment();
         } catch (error) {
             console.error('Error submitting comment:', error);
         }
     };
+    
 
     const parseSteps = (stepsString) => {
         try {
@@ -113,9 +151,11 @@ function PostDetails() {
                         ))}
                     </Carousel>
                     <div className="post-footer">
-                        <button onClick={handleLikeToggle}>
-                            {userLiked ? <AiFillHeart /> : <AiOutlineHeart />}
-                        </button>
+                    <button onClick={toggleLike}>
+                        {userLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+                    </button>
+
+                    <span>{likeCount}</span>
                         <button>
                             <AiOutlineComment />
                         </button>
