@@ -1,16 +1,19 @@
+// Home.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
 import LoginMessage from '../components/LoginMsg';
+import PostDetails from '../screens/PostDetails'; // Import the PostDetails component
 import '../styles/Home.css';
 
 function Home() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [showLoginMessage, setShowLoginMessage] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: 'Name' }); // Initialize with empty object
+  const [currentUser, setCurrentUser] = useState({ name: 'Name' });
 
   const navigate = useNavigate();
 
@@ -48,7 +51,7 @@ function Home() {
 
   const handlePostClick = (postId) => {
     if (token) {
-      navigate(`/post/${postId}`);
+      navigate(`/post/${postId}`); // Navigate to post details page
     } else {
       setShowLoginMessage(true);
     }
@@ -56,7 +59,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      <Sidebar currentUser={currentUser} />
+      <Sidebar currentUser={currentUser} token={token} />
       <div className="recipes">
         <h2>Recipes</h2>
         {posts.length === 0 ? (

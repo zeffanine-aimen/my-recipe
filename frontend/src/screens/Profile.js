@@ -113,13 +113,14 @@ const Profile = () => {
       </div>
       <div className="profile-details">
       <div className="avatar-section">
-        {avatar ? (
+      {avatar ? (
           <img src={URL.createObjectURL(avatar)} alt="Selected Avatar" className="selected-avatar" onClick={() => inputRef.current.click()} />
-        ) : userData.img_uri ? (
-          <img src={`${process.env.REACT_APP_API_URL}${userData.img_uri}`} alt={userData.name} className="avatar" onClick={() => inputRef.current.click()} />
+        ) : (userData && userData.img_uri) ? (
+          <img src={`${process.env.REACT_APP_API_URL}${userData.img_uri}`} alt={userData.name || ''} className="avatar" onClick={() => inputRef.current.click()} />
         ) : (
           <FaUserCircle className="avatar" onClick={() => inputRef.current.click()} />
         )}
+
         <input type="file" accept="image/*" onChange={handleAvatarChange} ref={inputRef} style={{ display: 'none' }} />
         <button onClick={handleUploadAvatar}>Upload Avatar</button>
       </div>

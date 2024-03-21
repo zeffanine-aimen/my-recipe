@@ -12,7 +12,7 @@ const CreatePost = () => {
   const [country, setCountry] = useState('');
   const [region, setRegion] = useState('');
   const [postImages, setPostImages] = useState([]);
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const navigate = useNavigate();
 
@@ -37,8 +37,9 @@ const CreatePost = () => {
     }
   };
 
-  const handleSubmit = async (e, token) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
       const rawContentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
       const formData = new FormData();
@@ -46,7 +47,8 @@ const CreatePost = () => {
       formData.append('contents', contents);
       formData.append('country', country);
       formData.append('region', region);
-      formData.append('steps', rawContentState);
+      formData.append('steps', rawContentState); // Sending steps as JSON string
+      
       postImages.forEach((image) => {
         formData.append('postImg', image);
       });
@@ -54,17 +56,24 @@ const CreatePost = () => {
       await axios.post(`${process.env.REACT_APP_API_URL}/posts/create`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: token
+          Authorization: localStorage.getItem('token')
         }
       });
       console.log('Post created successfully');
       navigate('/');
+      // Clear input fields after successful submission
+      setTitle('');
+      setContents('');
+      setCountry('');
+      setRegion('');
+      setPostImages([]);
+      setEditorState(EditorState.createEmpty());
     } catch (error) {
-      console.error('Error creating post:', error.response.data.errors);
-      setErrors(error.response.data.errors);
+      console.error('Error creating post:', error.response ? error.response.data.errors : error.message);
+      setErrors(error.response ? error.response.data.errors : [{ msg: error.message }]);
   
       setTimeout(() => {
-        setErrors(null);
+        setErrors([]);
       }, 3000);
     }
   };
@@ -74,17 +83,19 @@ const CreatePost = () => {
     setPostImages(prevImages => [...prevImages, ...files]);
   };
 
+  
+
   return (
     <div className="container">
       <h2>Create a New Post</h2>
-      {errors && errors.length > 0 && (
+      {errors.length > 0 && (
         <div className="error-messages">
           {errors.map((error, index) => (
             <p key={index}>{error.msg}</p>
           ))}
         </div>
       )}
-      <form onSubmit={(e) => handleSubmit(e, localStorage.getItem('token'))}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
           <input id="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
