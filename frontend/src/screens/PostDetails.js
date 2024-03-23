@@ -139,10 +139,6 @@ function PostDetails() {
         <div className="post-details-container">
             {post ? (
                 <div>
-                    <div className="post-header">
-                        <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
-                        <p>{post.User.name}</p>
-                    </div>
                     <Carousel className="carousel-root" showThumbs={true} thumbWidth={100} thumbHeight={80}>
                         {post.Post_Images.map((image, index) => (
                             <div key={index} className="carousel-slide">
@@ -160,11 +156,15 @@ function PostDetails() {
                             <AiOutlineComment />
                         </button>
                     </div>
+                    <div className="post-header">
+                        <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
+                        <p>{post.User.name}</p>
+                    </div>
                     <div className="post-content">
-                        <h2>{post.title}</h2>
-                        <p>{post.content}</p>
                         <p>{post.country}, {post.region}</p>
                         <p>{updatedAt.fromNow()}</p>
+                        <h2>{post.title}</h2>
+                        <p>{post.content}</p>
                     </div>
                     <div className="comment-input">
                         <input
