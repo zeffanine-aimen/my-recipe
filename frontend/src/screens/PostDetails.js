@@ -147,22 +147,28 @@ function PostDetails() {
                         ))}
                     </Carousel>
                     <div className="post-footer">
-                    <button onClick={toggleLike}>
-                        {userLiked ? <AiFillHeart /> : <AiOutlineHeart />}
-                    </button>
-
-                    <span>{likeCount}</span>
+                        <div className="like-comment-container">
+                            <button onClick={toggleLike}>
+                                {userLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+                            </button>
+                            <span className="like-count">{likeCount}</span>
+                        </div>
                         <button>
                             <AiOutlineComment />
                         </button>
                     </div>
+    
                     <div className="post-header">
-                        <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
-                        <p>{post.User.name}</p>
+                        <div className="user-info">
+                            <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
+                            <p>{post.User.name}</p>
+                        </div>
+                        <div className="post-meta">
+                            <p>{post.country}, {post.region}</p>
+                            <p>{updatedAt.fromNow()}</p>
+                        </div>
                     </div>
                     <div className="post-content">
-                        <p>{post.country}, {post.region}</p>
-                        <p>{updatedAt.fromNow()}</p>
                         <h2>{post.title}</h2>
                         <p>{post.content}</p>
                     </div>
@@ -176,13 +182,16 @@ function PostDetails() {
                         <button onClick={handleCommentSubmit}>Post</button>
                     </div>
                     <div>
-                        {comments.map((comment, index) => (
-                            <div key={index}>
-                                <img src={`${process.env.REACT_APP_API_URL}${comment.User.img_uri}`} alt="User avatar" />
-                                <p>{comment.User.name}</p>
-                                <p>{comment.text}</p>
+                    {comments.map((comment, index) => (
+                        <div className="comment" key={index}>
+                            <img src={`${process.env.REACT_APP_API_URL}${comment.User.img_uri}`} alt="User avatar" className="user-avatar" />
+                            <div className="comment-info">
+                                <p className="comment-text">{comment.text}</p>
+                                <p className="comment-date">{moment(comment.createdAt).fromNow()}</p>
                             </div>
-                        ))}
+                        </div>
+                    ))}
+
                     </div>
                 </div>
             ) : (
@@ -190,6 +199,7 @@ function PostDetails() {
             )}
         </div>
     );
+    
 }
 
 export default PostDetails;

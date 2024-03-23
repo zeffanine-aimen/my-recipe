@@ -1,112 +1,191 @@
-.post-details-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .post-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .post-header p {
-    margin: 0;
-  }
-  
-  .post-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .post-content {
-    padding: 10px;
-  }
-  
-  .post-content h2 {
-    margin-top: 0;
-  }
-  
-  .post-content p {
-    margin-bottom: 10px;
-  }
-  
-  .carousel-root {
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .carousel .carousel-slide {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .carousel .carousel-slide img {
-    width: 100%;
-    height: 300px; /* Set a fixed height for the images */
-    object-fit: cover; /* Ensure images maintain aspect ratio and cover the container */
-  }
+/* Improved styles for the PostDetails component */
 
-  .carousel .thumbs-wrapper {
-    display: flex !important; /* Ensure thumbnails are displayed in a row */
-    justify-content: center; /* Center align thumbnails */
-  }
-  
-  .carousel .thumb {
-    width: 100px !important; /* Set a fixed width for thumbnails */
-    height: 80px !important; /* Set a fixed height for thumbnails */
-    margin: 0 5px; /* Adjust margin between thumbnails */
-    cursor: pointer; /* Add cursor pointer for better usability */
-  }
-  
-  .carousel .thumb img {
-    width: 100%; /* Ensure images fill the entire thumbnail container */
-    height: 100%; /* Ensure images fill the entire thumbnail container */
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
-    border-radius: 4px; /* Add border radius for rounded corners */
-  }
-  
-  .post-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .post-footer button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .post-footer button:focus {
-    outline: none;
-  }
-  
-  .comment-input {
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .comment-input input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 8px;
-    margin-right: 10px;
-    border-radius: 20px;
-  }
-  
-  .comment-input button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
+/* Container Styling */
+.post-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Post Header Styling */
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+}
+
+.post-header .user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.post-header .user-info p {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.post-header .post-meta p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Post Content Styling */
+.post-content {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-content h2 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.post-content p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Carousel Styling */
+.carousel-root {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.carousel .carousel-slide {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.carousel .carousel-slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.carousel .thumbs-wrapper {
+  display: flex !important;
+  justify-content: center;
+}
+
+.carousel .thumb {
+  width: 80px !important;
+  height: 60px !important;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.carousel .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Like and Comment Icons Styling */
+.post-footer {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.post-footer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 20px;
+  color: #888;
+  margin-right: 15px;
+}
+
+.post-footer .like-count {
+  font-size: 16px;
+  color: #555;
+  margin-left: -15px;
+}
+
+/* Comment Input Styling */
+.comment-input {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.comment-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px;
+  margin-right: 15px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.comment-input button {
+  background-color: #3897f0;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+.comment-input button:hover {
+  background-color: #3897f0;
+}
+
+/* Comment Styling */
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.comment .user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.comment .comment-info {
+  flex: 1;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment .comment-info p {
+  margin: 0;
+  line-height: 1.5;
+  color: #333;
+}
+
+.comment .comment-info .comment-date {
+  font-size: 12px;
+  color: #888;
+}
