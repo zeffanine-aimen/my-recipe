@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from 'react-icons/ai'; // Importing icons
+import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from 'react-icons/ai';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import '../styles/PostDetails.css'; // Import the CSS file
+import '../styles/PostDetails.css';
 
 function PostDetails() {
     const { postId } = useParams();
@@ -45,15 +45,14 @@ function PostDetails() {
                     }
                 }
             );
-            setCommentInput(''); // Clear comment input after submission
-            // Refetch comments to update UI
+            setCommentInput('');
             const comments = await fetchComments();
             setComments(comments);
         } catch (error) {
             console.error('Error creating comment:', error);
         }
     };
-    
+
     const fetchComments = async () => {
         try {
             const response = await axios.get(
@@ -70,7 +69,6 @@ function PostDetails() {
             return [];
         }
     };
-    
 
     const fetchLikeCount = async () => {
         try {
@@ -88,7 +86,6 @@ function PostDetails() {
             return { likes: 0, userLiked: false };
         }
     };
-    
 
     const toggleLike = async () => {
         try {
@@ -113,7 +110,6 @@ function PostDetails() {
             console.error('Error toggling like:', error);
         }
     };
-    
 
     const handleCommentSubmit = async () => {
         try {
@@ -122,7 +118,6 @@ function PostDetails() {
             console.error('Error submitting comment:', error);
         }
     };
-    
 
     const parseSteps = (stepsString) => {
         try {
@@ -157,7 +152,7 @@ function PostDetails() {
                             <AiOutlineComment />
                         </button>
                     </div>
-    
+
                     <div className="post-header">
                         <div className="user-info">
                             <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
@@ -170,7 +165,15 @@ function PostDetails() {
                     </div>
                     <div className="post-content">
                         <h2>{post.title}</h2>
-                        <p>{post.content}</p>
+                        <p>{post.contents}</p>
+                    </div>
+                    <div className="post-steps">
+                        <h3>Steps:</h3>
+                        <ul>
+                            {post.steps && parseSteps(post.steps).blocks.map((step, index) => (
+                                <li key={index}>{step.text}</li>
+                            ))}
+                        </ul>
                     </div>
                     <div className="comment-input">
                         <input
@@ -182,16 +185,15 @@ function PostDetails() {
                         <button onClick={handleCommentSubmit}>Post</button>
                     </div>
                     <div>
-                    {comments.map((comment, index) => (
-                        <div className="comment" key={index}>
-                            <img src={`${process.env.REACT_APP_API_URL}${comment.User.img_uri}`} alt="User avatar" className="user-avatar" />
-                            <div className="comment-info">
-                                <p className="comment-text">{comment.text}</p>
-                                <p className="comment-date">{moment(comment.createdAt).fromNow()}</p>
+                        {comments.map((comment, index) => (
+                            <div className="comment" key={index}>
+                                <img src={`${process.env.REACT_APP_API_URL}${comment.User.img_uri}`} alt="User avatar" className="user-avatar" />
+                                <div className="comment-info">
+                                    <p className="comment-text">{comment.text}</p>
+                                    <p className="comment-date">{moment(comment.createdAt).fromNow()}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-
+                        ))}
                     </div>
                 </div>
             ) : (
@@ -199,7 +201,7 @@ function PostDetails() {
             )}
         </div>
     );
-    
+
 }
 
 export default PostDetails;

@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
 import LoginMessage from '../components/LoginMsg';
-import PostDetails from '../screens/PostDetails'; // Import the PostDetails component
 import '../styles/Home.css';
 
 function Home() {

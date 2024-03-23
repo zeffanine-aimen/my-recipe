@@ -1,9 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaStickyNote, FaPlusCircle, FaSignOutAlt, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import '../styles/Sidebar.css'; // Import the CSS file for styling
 
 function Sidebar({ currentUser, token }) {
+
+  const navigate = useNavigate(); // Using useNavigate hook
+
+  const handleLogout = () => {
+    // Remove token from local storage
+    localStorage.removeItem('token');
+    // Navigate to login page
+    navigate('/login');
+  };
+
   return (
     <div className="sidebar">
       {/* Current user profile */}
@@ -41,10 +51,10 @@ function Sidebar({ currentUser, token }) {
               <FaPlusCircle className="icon" />
               <span className="link-text">Create Post</span>
             </Link>
-            <Link to="/logout" className="link" onClick={() => localStorage.removeItem('token')}>
+            <a href="#" className="link" onClick={handleLogout}>
               <FaSignOutAlt className="icon" />
               <span className="link-text">Logout</span>
-            </Link>
+            </a>
           </>
         ) : (
           <>

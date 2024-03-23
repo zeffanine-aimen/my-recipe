@@ -111,8 +111,8 @@ exports.updateMyPost = async (req, res) => {
             }
         );
         res.status(200).json({
-            message: "تم التعديل على بيانات المنشور"
-        })
+            message: "The post information has been modified."
+            })
     } catch(e) {
         res.status(500).json(e)
     }
@@ -142,7 +142,7 @@ exports.deleteMyPost = async (req, res) => {
         await models.Post.destroy({
             where: {id: postId, UserId: req.currentUser.id}
         })
-        res.status(200).json({message: "تم حذف منشورك"})
+        res.status(200).json({message: "Your post has been deleted"})
     } catch(e) {
         res.status(500).json(e)
     }
