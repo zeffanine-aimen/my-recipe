@@ -1,0 +1,111 @@
+/* Styles for MyPosts component */
+.my-posts {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.my-posts .posts-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.my-posts .post-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.my-posts .post-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.my-posts .post-card p {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.my-posts .post-card img {
+  width: 100%; /* Ensures the image takes up the full width of its container */
+  height: 200px; /* Set a fixed height for all images */
+  object-fit: cover; /* Ensures the image covers the entire container while maintaining its aspect ratio */
+  border-radius: 10px; /* Applies rounded corners */
+  margin-bottom: 15px;
+}
+.my-posts .button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.my-posts .button-primary {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.my-posts .button-primary:hover {
+  background-color: #2980b9;
+}
+
+.my-posts .button-danger {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.my-posts .button-danger:hover {
+  background-color: #c0392b;
+}
+
+.my-posts .update-form {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-bottom: 10px;
+}
+
+.my-posts .update-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.my-posts .input,
+.my-posts .textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.my-posts .button-primary,
+.my-posts .button-danger {
+  margin-right: 10px;
+}
+
+.my-posts .button-small {
+  padding: 8px 15px;
+  font-size: 0.8rem;
+}
+
+.my-posts .button-small:hover {
+  filter: brightness(90%);
+}
+
+.my-posts .delete-button {
+  margin-left: auto;
+  width: 100%;
+  margin-top: 5px;
+}
