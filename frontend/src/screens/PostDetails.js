@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from 'react-icons/ai';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -15,24 +15,29 @@ function PostDetails() {
     const [userLiked, setUserLiked] = useState(false);
     const [commentInput, setCommentInput] = useState('');
     const token = localStorage.getItem('token');
+    const navigate = useNavigate(); // Hook for navigation
 
     useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}`);
-                setPost(response.data);
-                const comments = await fetchComments();
-                setComments(comments);
-                const { likes, userLiked } = await fetchLikeCount();
-                setLikeCount(likes);
-                setUserLiked(userLiked);
-            } catch (error) {
-                console.error('Error fetching post:', error);
-            }
-        };
-
-        fetchPost();
-    }, [postId, token]);
+        if (!token) {
+            navigate('/login'); // Redirect to login page if token is not available
+        } else {
+            const fetchPost = async () => {
+                try {
+                    const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}`);
+                    setPost(response.data);
+                    const comments = await fetchComments();
+                    setComments(comments);
+                    const { likes, userLiked } = await fetchLikeCount();
+                    setLikeCount(likes);
+                    setUserLiked(userLiked);
+                } catch (error) {
+                    console.error('Error fetching post:', error);
+                }
+            };
+    
+            fetchPost();
+        }
+    }, [postId, token, navigate]);
 
     const createComment = async () => {
         try {

@@ -3,18 +3,24 @@ import axios from 'axios';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import '../styles/MyPosts.css'
-
+import '../styles/MyPosts.css';
+import { useNavigate } from 'react-router-dom';
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
   const [updateData, setUpdateData] = useState({});
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    } else {
+      fetchPosts();
+    }
+  }, [navigate]);
 
   const fetchPosts = async () => {
     try {

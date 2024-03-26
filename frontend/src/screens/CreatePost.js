@@ -14,7 +14,7 @@ const CreatePost = () => {
   const [postImages, setPostImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
     fetchUserLocation();
@@ -83,7 +83,13 @@ const CreatePost = () => {
     setPostImages(prevImages => [...prevImages, ...files]);
   };
 
-  
+  // Redirect if there is no token
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   return (
     <div className="container">

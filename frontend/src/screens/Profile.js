@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { FaUserCircle, FaHome } from 'react-icons/fa'; // Import FaHome for the home icon
-import { Link } from 'react-router-dom'; // Import Link for routing
-
-import '../styles/Profile.css'; // Import your CSS file for styling
+import { FaUserCircle } from 'react-icons/fa'; 
+import { Link, useNavigate } from 'react-router-dom'; 
+import '../styles/Profile.css'; 
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -16,7 +15,7 @@ const Profile = () => {
   const token = localStorage.getItem('token');
   const [loading, setLoading] = useState(true);
   const inputRef = useRef(null);
-
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
     fetchProfileData();
@@ -106,24 +105,31 @@ const Profile = () => {
     return isValid;
   };
 
+  // Redirect if there is no token
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token, navigate]);
+
   return (
     <div className="profile-container">
       <div className="profile-header">
         <h1>Profile</h1>
       </div>
       <div className="profile-details">
-      <div className="avatar-section">
-      {avatar ? (
-          <img src={URL.createObjectURL(avatar)} alt="Selected Avatar" className="selected-avatar" onClick={() => inputRef.current.click()} />
-        ) : (userData && userData.img_uri) ? (
-          <img src={`${process.env.REACT_APP_API_URL}${userData.img_uri}`} alt={userData.name || ''} className="avatar" onClick={() => inputRef.current.click()} />
-        ) : (
-          <FaUserCircle className="avatar" onClick={() => inputRef.current.click()} />
-        )}
+        <div className="avatar-section">
+          {avatar ? (
+            <img src={URL.createObjectURL(avatar)} alt="Selected Avatar" className="selected-avatar" onClick={() => inputRef.current.click()} />
+          ) : (userData && userData.img_uri) ? (
+            <img src={`${process.env.REACT_APP_API_URL}${userData.img_uri}`} alt={userData.name || ''} className="avatar" onClick={() => inputRef.current.click()} />
+          ) : (
+            <FaUserCircle className="avatar" onClick={() => inputRef.current.click()} />
+          )}
 
-        <input type="file" accept="image/*" onChange={handleAvatarChange} ref={inputRef} style={{ display: 'none' }} />
-        <button onClick={handleUploadAvatar}>Upload Avatar</button>
-      </div>
+          <input type="file" accept="image/*" onChange={handleAvatarChange} ref={inputRef} style={{ display: 'none' }} />
+          <button onClick={handleUploadAvatar}>Upload Avatar</button>
+        </div>
 
         <div className="profile-form">
           <form onSubmit={handleUpdateProfile}>
@@ -142,7 +148,6 @@ const Profile = () => {
         </div>
       </div>
       {message && <p className="profile-message">{message}</p>}
-      
     </div>
   );
 };
