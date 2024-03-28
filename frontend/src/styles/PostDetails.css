@@ -32,6 +32,12 @@
   color: #333;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
 .post-header .post-meta p {
   margin: 0;
   font-size: 14px;
@@ -167,7 +173,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 8px;
 }
 
 .comment .comment-info {

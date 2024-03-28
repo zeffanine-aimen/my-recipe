@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -93,6 +93,7 @@ const CreatePost = () => {
 
   return (
     <div className="container">
+      <Link to="/" className="back-link">Back to Home</Link> {/* Add Link to the home page */}
       <h2>Create a New Post</h2>
       {errors.length > 0 && (
         <div className="error-messages">

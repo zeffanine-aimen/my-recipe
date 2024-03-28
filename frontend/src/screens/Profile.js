@@ -116,6 +116,7 @@ const Profile = () => {
     <div className="profile-container">
       <div className="profile-header">
         <h1>Profile</h1>
+        <Link to="/">Go back to Home</Link> {/* Add Link to Home */}
       </div>
       <div className="profile-details">
         <div className="avatar-section">

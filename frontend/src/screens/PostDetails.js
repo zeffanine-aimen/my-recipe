@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
-import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from 'react-icons/ai';
+import { useParams, useNavigate, Link } from 'react-router-dom'; // Import useNavigate and Link
+import { AiOutlineHeart, AiFillHeart, AiOutlineComment, AiOutlineUser } from 'react-icons/ai';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import '../styles/PostDetails.css';
@@ -137,6 +137,7 @@ function PostDetails() {
 
     return (
         <div className="post-details-container">
+            <Link to="/" className="back-link">Back to Home</Link> {/* Add Link to the home page */}
             {post ? (
                 <div>
                     <Carousel className="carousel-root" showThumbs={true} thumbWidth={100} thumbHeight={80}>
@@ -160,7 +161,18 @@ function PostDetails() {
 
                     <div className="post-header">
                         <div className="user-info">
-                            <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
+                            {post.User.img_uri ? (
+                                <img src={`${process.env.REACT_APP_API_URL}${post.User.img_uri}`} alt="User avatar" />
+                            ) : (
+                                <AiOutlineUser style={{ 
+                                    borderRadius: '50%',
+                                    backgroundColor: '#f2f2f2',
+                                    color: '#666',
+                                    padding: '5px',
+                                    fontSize: '39px',
+                                    marginRight: '8px'
+                                }} />   
+                            )}
                             <p>{post.User.name}</p>
                         </div>
                         <div className="post-meta">
@@ -192,7 +204,22 @@ function PostDetails() {
                     <div>
                         {comments.map((comment, index) => (
                             <div className="comment" key={index}>
-                                <img src={`${process.env.REACT_APP_API_URL}${comment.User.img_uri}`} alt="User avatar" className="user-avatar" />
+                                <div className="user-info">
+                                    {comment.User.img_uri ? (
+                                        <img src={`${process.env.REACT_APP_API_URL}${comment.User.img_uri}`} alt="User avatar" className="user-avatar" />
+                                    ) : (
+                                        <AiOutlineUser style={{ 
+                                            borderRadius: '50%',
+                                            backgroundColor: '#f2f2f2',
+                                            color: '#666',
+                                            padding: '5px',
+                                            fontSize: '39px',
+                                            marginRight: '8px'
+                                        }} />                                        
+
+                                    )}
+                                    <p>{comment.User.name}</p>
+                                </div>
                                 <div className="comment-info">
                                     <p className="comment-text">{comment.text}</p>
                                     <p className="comment-date">{moment(comment.createdAt).fromNow()}</p>

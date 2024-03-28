@@ -4,7 +4,7 @@ import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '../styles/MyPosts.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -126,6 +126,7 @@ const MyPosts = () => {
   return (
     <div className="my-posts">
       <h1 className="title">My Posts</h1>
+      <Link to="/" className="back-link">Back to Home</Link> {/* Add Link to the home page */}
       {showUpdateForm && (
         <div className="update-form">
           <h2 className="update-title">Update Post</h2>

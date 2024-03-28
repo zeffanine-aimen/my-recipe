@@ -108,3 +108,18 @@
   border: 1px solid #7ed6df; /* Instagram's success message border color */
   border-radius: 5px;
 }
+
+/* Styling for the link to go back to the home page */
+.home-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #3b82f6; /* Blue color */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Adding smooth transition */
+}
+
+.home-link:hover {
+  color: #2563eb; /* Darker blue on hover */
+}
